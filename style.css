@@ -12,10 +12,16 @@
     box-sizing: border-box;
 }
 
+html { scroll-behavior: smooth; }
+
+section { scroll-margin-top: 4.5rem; }
+
+
 body {
     margin: 0;
     padding: 0;
     background-color: var(--antiflash-white);
+    line-height: 1.5;
     color: var(--space-cadet);
     opacity: .9;
     background-image:  radial-gradient(var(--space-cadet) 0.5px, transparent 0.5px), radial-gradient(var(--space-cadet) 0.5px, var(--antiflash-white) 0.5px);
@@ -109,16 +115,10 @@ nav {
 }
 
 @keyframes slide-in-right {
-    0% {
-        transform: translate(100%, 0);
-        -webkit-transform: translateX(1500px);
-    }
-
-    100% {
-        transform: translate(0, 0);
-        -webkit-transform: translateX(0px);
-    }
+  0%   { transform: translateX(1500px); }
+  100% { transform: translateX(0); }
 }
+
 
 .slide-in-right {
     animation: slide-in-right 2s ease;
@@ -160,12 +160,14 @@ nav {
 }
 
 hr {
-    border-top: 3px dotted var(--space-cadet);
-    margin: 0rem 0rem 2rem 0rem;
-    width: 10%;
-    align-self: center;
-    margin: auto;
+  border: 0;
+  height: 0;
+  border-top: 3px dotted var(--space-cadet);
+  width: 40%;
+  margin: 2rem auto;
+  background: transparent;
 }
+
 
 .reveal {
     position: relative;
@@ -222,7 +224,7 @@ hr {
 }
 
 .skill-image:hover {
-    transform: scale(1.8);
+    transform: scale(1.2);
 }
 
 .skill-image {
@@ -239,12 +241,21 @@ a {
     color: var(--fire-engine-red);
 }
 
+a:focus-visible,
+.hero-button:focus-visible,
+.hamburger:focus-visible {
+  outline: 3px solid var(--fire-engine-red);
+  outline-offset: 3px;
+  border-radius: .5rem;
+}
+
+
 html ::-webkit-scrollbar {
     width: 0.25rem;
 }
 
 html ::-webkit-scrollbar-track {
-    background: var(--anti--reflash-white);
+    background: var(--antiflash-white);
 }
 
 html ::-webkit-scrollbar-thumb {
@@ -282,7 +293,7 @@ html ::-webkit-scrollbar-thumb {
 }
 
 .project img {
-    width: 100%;
+    width: 40%;
     transition: all 0.2s ease-in-out;
     border-radius: 1rem;
     grid-row: span 2;
@@ -337,4 +348,86 @@ html ::-webkit-scrollbar-thumb {
         margin: 0 auto;
 
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-in-right, .reveal {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  #selfie:hover, .skill-image:hover {
+    transform: none !important;
+  }
+}
+
+/* --- Skills: chip mode (only when #skills-container has class="chips") --- */
+#skills-container.chips {
+  max-width: 700px;        /* wider than 400px so chips have room */
+  text-align: left;        /* better for multi-line labels */
+}
+
+#skills-container.chips #skills {
+  display: grid;           /* replace the old flex row only in chip mode */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: .75rem;
+  margin: 1rem auto;
+  max-width: 100%;
+}
+
+#skills-container.chips .skill-image {
+  /* convert the tiny icon tiles into row chips */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;        /* top-align so tags sit by the first line */
+  gap: .5rem;
+  width: auto;                    /* override old 65px tiles */
+  background: #f4f6fb;
+  border: 1px solid #e5e7eb;
+  border-radius: .75rem;
+  padding: .6rem .8rem;
+  line-height: 1.25;
+  transition: transform .15s ease, box-shadow .15s ease;
+  justify-content: flex-start;
+}
+
+#skills-container.chips .skill-image i {
+  color: var(--space-cadet);
+  align-self: flex-start;         /* icon lines up with first line of text */
+  margin-top: 2px;                /* optical tweak */
+}
+
+#skills-container.chips .skill-image .sub {
+  opacity: .8;
+  font-weight: 400;
+  margin-left: .25rem;
+}
+
+#skills-container.chips .skill-image .tag {
+  margin-left: auto;              /* push to the right edge */
+  align-self: flex-start;         /* top-align with first line */
+  margin-top: .1rem;
+  font-size: .8rem;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  border-radius: .5rem;
+  padding: .1rem .4rem;
+  white-space: nowrap;
+}
+#skills-container.chips .skill-image .tag a { text-decoration: none; }
+
+/* Override the big zoom from your original tiles ONLY in chip mode */
+#skills-container.chips .skill-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+/* Mobile: single-column chips */
+@media (max-width: 800px) {
+  #skills-container.chips #skills {
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+  }
 }
