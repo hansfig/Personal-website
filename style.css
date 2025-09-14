@@ -12,22 +12,28 @@
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html { 
+    scroll-behavior: smooth;
+    min-height: 100%; 
+}
 
 section { scroll-margin-top: 4.5rem; }
 
 
 body {
+    min-height: 100%;
     margin: 0;
     padding: 0;
     background-color: var(--antiflash-white);
-    line-height: 1.5;
     color: var(--space-cadet);
-    opacity: .9;
-    background-image:  radial-gradient(var(--space-cadet) 0.5px, transparent 0.5px), radial-gradient(var(--space-cadet) 0.5px, var(--antiflash-white) 0.5px);
+    line-height: 1.5;
+    background-image: radial-gradient(var(--space-cadet) 0.6px, transparent 0.6px),
+                      radial-gradient(var(--space-cadet) 0.6px, var(--antiflash-white) 0.8px);
     background-size: 20px 20px;
-    background-position: 0 0,10px 10px;
+    background-position: 0 0, 10px 10px;
+    background-repeat: repeat;
 }
+
 
 main {
     margin: 0px 3rem 0px 3rem;
@@ -145,8 +151,7 @@ nav {
     border: none;
     border-radius: 2rem;
     padding: 0.5rem 1rem;
-    font-size: 1.0rem;
-    font-weight: 700;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     min-width: 80px;
@@ -382,8 +387,7 @@ html ::-webkit-scrollbar-thumb {
   flex-direction: row;
   align-items: flex-start;        /* top-align so tags sit by the first line */
   gap: .5rem;
-  width: auto;                    /* override old 65px tiles */
-  background: #f4f6fb;
+  width: auto;                    /* override old 65px tiles  */
   border: 1px solid #e5e7eb;
   border-radius: .75rem;
   padding: .6rem .8rem;
@@ -409,7 +413,6 @@ html ::-webkit-scrollbar-thumb {
   align-self: flex-start;         /* top-align with first line */
   margin-top: .1rem;
   font-size: .8rem;
-  background: #eef2ff;
   border: 1px solid #c7d2fe;
   border-radius: .5rem;
   padding: .1rem .4rem;
